@@ -1,0 +1,86 @@
+/* Navbar */
+.navbar {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.8rem 0;
+}
+
+.navbar-nav .nav-link {
+    color: var(--text-muted) !important;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--primary) !important;
+}
+
+.navbar-nav .nav-link.active {
+    background: var(--primary-subtle);
+    border-radius: var(--radius-sm);
+}
+
+/* Base Layout */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background);
+}
+
+main {
+    flex: 1;
+}
+
+/* Auth Pages (Login/Register) */
+.auth-page {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%) !important;
+    color: var(--text-main);
+}
+
+.auth-card {
+    background: white !important;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+}
+
+/* Home Section Layouts */
+.hero-section {
+    background: radial-gradient(circle at top right, #f0fdf4, transparent), 
+                radial-gradient(circle at bottom left, #ecfdf5, transparent),
+                #ffffff !important;
+}
+
+.hero-title {
+    color: #064e3b !important;
+}
+
+.hero-description {
+    color: #374151 !important;
+}
+
+/* Feature Cards */
+.feature-card-wrapper {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: var(--transition);
+}
+
+.feature-card-wrapper:hover {
+    border-color: var(--primary-light);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Utilities */
+.shadow-glow-light {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+}
+
+.footer-light {
+    background: #f8fafc;
+    border-top: 1px solid var(--border);
+}
