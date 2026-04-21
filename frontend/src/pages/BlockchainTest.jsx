@@ -137,6 +137,11 @@ const BlockchainTest = () => {
     }
   };
 
+  const formatAction = (action) => {
+    if (!action) return '---';
+    return action.replace(/^[a-z_]+: /, '');
+  };
+
   return (
     <div className="blockchain-test-page min-vh-100 py-5 mt-4 bg-light">
       <div className="container">
@@ -317,7 +322,7 @@ const BlockchainTest = () => {
                       >
                         <div className="position-absolute top-0 start-0 translate-middle-x mt-1 ms-3 bg-success rounded-circle shadow-sm" style={{ width: '14px', height: '14px', border: '2px solid white' }}></div>
                         <div className="bg-light p-3 rounded-4 border-0 shadow-sm transition-all hover:shadow-md">
-                          <h6 className="fw-bold text-dark mb-2 text-success">{r.action}</h6>
+                          <h6 className="fw-bold text-dark mb-2 text-success">{formatAction(r.action)}</h6>
                           <div className="d-flex align-items-center gap-2 text-secondary small mb-1">
                             <MapPin size={14} className="text-success opacity-50" /> {r.location}
                           </div>

@@ -13,13 +13,13 @@ router.post('/', async (req, res) => {
       service: 'gmail',
       auth: {
         user: 'dongnguyenkh123@gmail.com', // Mail admin nhận thông báo
-        pass: 'your_app_password_here'   // Điền mật khẩu ứng dụng Gmail vào đây
+        pass: 'xtws ltfd asvz oexb'   // Điền mật khẩu ứng dụng Gmail vào đây
       }
     });
 
     // 2. Nội dung Email
     const mailOptions = {
-      from: 'AgriTrace System <no-reply@agritrace.vn>',
+      from: 'dongnguyenkh123@gmail.com', // Phải trùng với mail đăng nhập
       to: 'dongnguyenkh123@gmail.com',
       subject: `[AgriTrace] Yêu cầu hợp tác mới: ${subject}`,
       html: `
@@ -43,12 +43,12 @@ router.post('/', async (req, res) => {
 
     // 3. Gửi mail thực tế
     await transporter.sendMail(mailOptions);
-    
+
     console.log(`[Email Sent] To: ${mailOptions.to} | Subject: ${subject}`);
 
-    res.json({ 
-      success: true, 
-      message: 'Yêu cầu của bạn đã được gửi đến Admin. Chúng tôi sẽ phản hồi sớm nhất!' 
+    res.json({
+      success: true,
+      message: 'Yêu cầu của bạn đã được gửi đến Admin. Chúng tôi sẽ phản hồi sớm nhất!'
     });
 
   } catch (err) {

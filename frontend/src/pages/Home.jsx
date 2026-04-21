@@ -37,11 +37,11 @@ const Home = ({ user }) => {
   return (
     <div className="home-page overflow-hidden" style={{ background: '#ffffff' }}>
       {/* Subtle Background Elements */}
-      <div className="position-absolute" style={{ width: '600px', height: '600px', background: 'radial-gradient(circle, #f0fdf4 0%, transparent 70%)', top: '-200px', right: '-100px', zIndex: 0 }}></div>
-      <div className="position-absolute" style={{ width: '400px', height: '400px', background: 'radial-gradient(circle, #f0f9ff 0%, transparent 70%)', bottom: '10%', left: '-100px', zIndex: 0 }}></div>
+      <div className="position-absolute deco-circle" style={{ width: '600px', height: '600px', background: 'radial-gradient(circle, #f0fdf4 0%, transparent 70%)', top: '-200px', right: '-100px', zIndex: 0 }}></div>
+      <div className="position-absolute deco-circle" style={{ width: '400px', height: '400px', background: 'radial-gradient(circle, #f0f9ff 0%, transparent 70%)', bottom: '10%', left: '-100px', zIndex: 0 }}></div>
 
       {/* Hero Section */}
-      <section className="hero-section" style={{ padding: '140px 0 100px', position: 'relative', zIndex: 1 }}>
+      <section className="hero-section" style={{ position: 'relative', zIndex: 1 }}>
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-7">
@@ -55,7 +55,7 @@ const Home = ({ user }) => {
                   <span>Nền tảng Blockchain Nông nghiệp tin cậy</span>
                 </motion.div>
                 
-                <motion.h1 variants={itemVariants} className="hero-title" style={{ fontSize: '4.2rem', fontWeight: 800, marginBottom: '24px', color: '#064e3b', lineHeight: 1.1 }}>
+                <motion.h1 variants={itemVariants} className="hero-title" style={{ fontWeight: 800, marginBottom: '24px', color: '#064e3b', lineHeight: 1.1 }}>
                   Minh bạch hóa <br />
                   <span className="text-gradient">Nông sản Việt</span>
                 </motion.h1>
@@ -65,10 +65,10 @@ const Home = ({ user }) => {
                 </motion.p>
                 
                 <motion.div variants={itemVariants} className="d-flex gap-3 mb-5">
-                  <Link to="/trace" className="btn btn-primary btn-lg px-5 py-3 shadow-md d-flex align-items-center gap-2">
+                  <Link to="/trace" className="btn btn-primary btn-lg d-flex align-items-center gap-2">
                     <Search size={22} /> Truy xuất ngay
                   </Link>
-                  <Link to="/products" className="btn btn-outline-primary btn-lg px-5 py-3" style={{ borderRadius: 'var(--radius-md)' }}>
+                  <Link to="/products" className="btn btn-outline-primary btn-lg">
                     Xem sản phẩm
                   </Link>
                 </motion.div>
@@ -79,8 +79,8 @@ const Home = ({ user }) => {
                     { label: 'Lô hàng sạch', value: stats.lo_san_pham + '+', icon: <Database size={20} /> },
                     { label: 'Giao dịch', value: stats.blockchain + '+', icon: <GitBranch size={20} /> }
                   ].map((stat, i) => (
-                    <div key={i} className="col-4">
-                      <div className="p-3 border-start border-primary border-3" style={{ background: '#f8fafc', borderRadius: '0 8px 8px 0' }}>
+                    <div key={i} className="col-12 col-sm-4">
+                      <div className="p-3 border-start border-primary border-3 stat-card h-100" style={{ background: '#f8fafc', borderRadius: '0 8px 8px 0' }}>
                         <div className="text-primary mb-1">{stat.icon}</div>
                         <div className="h3 fw-bold mb-0" style={{ color: '#064e3b' }}>{stat.value}</div>
                         <div className="small text-uppercase tracking-wider text-muted" style={{ fontSize: '0.7rem', fontWeight: 600 }}>{stat.label}</div>
@@ -143,18 +143,28 @@ const Home = ({ user }) => {
         </div>
       </section>
 
-      {/* Trust Logistics Banner */}
-      <div className="py-5" style={{ background: '#f8fafc' }}>
+      {/* Certifications Showroom */}
+      <section className="py-5 bg-white">
          <div className="container">
-            <div className="d-flex justify-content-around align-items-center flex-wrap gap-5 opacity-40 grayscale">
-               <span className="fw-black h4 mb-0">VIETGAP</span>
-               <span className="fw-black h4 mb-0">GLOBAL GAP</span>
-               <span className="fw-black h4 mb-0">ISO 22000</span>
-               <span className="fw-black h4 mb-0">HACCP</span>
-               <span className="fw-black h4 mb-0">BRC FOOD</span>
+            <div className="text-center mb-4">
+               <span className="text-muted small text-uppercase fw-bold tracking-widest">Tiêu chuẩn quốc tế áp dụng</span>
+            </div>
+            <div className="d-flex justify-content-center align-items-center flex-wrap gap-4">
+               {[
+                  'VIETGAP', 'GLOBAL GAP', 'ISO 22000', 'HACCP', 'BRC FOOD'
+               ].map((cert, i) => (
+                  <motion.div 
+                    key={i}
+                    whileHover={{ scale: 1.05 }}
+                    className="px-4 py-2 rounded-3 border bg-light bg-opacity-50 d-flex align-items-center gap-2 shadow-sm"
+                  >
+                     <BadgeCheck size={18} className="text-success" />
+                     <span className="fw-bold text-dark opacity-75" style={{ fontSize: '0.9rem' }}>{cert}</span>
+                  </motion.div>
+               ))}
             </div>
          </div>
-      </div>
+      </section>
 
       {/* Features Section */}
       <section className="features-section py-5" style={{ background: '#ffffff' }}>
@@ -195,8 +205,8 @@ const Home = ({ user }) => {
                   <h2 className="display-5 fw-bold mb-4">Bạn đã sẵn sàng để minh bạch hóa <br/> thực phẩm của mình?</h2>
                   <p className="opacity-75 mb-5 max-w-2xl mx-auto fs-5">Hãy để AgriTrace giúp bạn khẳng định giá trị nông sản sạch và xây dựng niềm tin nơi khách hàng.</p>
                   <div className="d-flex justify-content-center gap-3">
-                     <Link to="/login" className="btn btn-light btn-lg px-5 fw-bold" style={{ color: '#065f46', borderRadius: 'var(--radius-md)' }}>Gia nhập mạng lưới</Link>
-                     <Link to="/trace" className="btn btn-outline-light btn-lg px-5" style={{ borderRadius: 'var(--radius-md)' }}>Tra cứu ngay</Link>
+                     <Link to="/cooperation" className="btn btn-light btn-lg px-5 fw-bold shadow-sm" style={{ color: '#065f46', borderRadius: '50px' }}>Gia nhập mạng lưới</Link>
+                     <Link to="/trace" className="btn btn-outline-light btn-lg px-5" style={{ borderRadius: '50px' }}>Tra cứu ngay</Link>
                   </div>
                </div>
             </div>

@@ -50,13 +50,21 @@ router.get('/dashboard', async (req, res) => {
       .populate('product', 'name image category');
 
     const activities = [];
+    const stageLabels = {
+      'gieo_trong': 'Gieo trồng & Cấy giống',
+      'cham_soc': 'Chăm sóc & Bón phân',
+      'thu_hoach': 'Thu hoạch nông sản',
+      'dong_goi': 'Đóng gói & Phân loại',
+      'van_chuyen': 'Vận chuyển đến kho',
+      'phan_phoi': 'Phân phối ra thị trường'
+    };
 
     for (const batch of recentBatches) {
       // Add batch creation event
       activities.push({
         id: batch._id.toString() + '_create',
         type: 'batch_created',
-        title: `Tạo lô hàng #${batch.batchCode}`,
+        title: `⚡ Khởi tạo lô hàng #${batch.batchCode}`,
         product: batch.product?.name || 'Không rõ',
         location: batch.productionLocation || 'Đang cập nhật',
         date: batch.createdAt,
@@ -70,10 +78,16 @@ router.get('/dashboard', async (req, res) => {
       if (batch.processes && batch.processes.length > 0) {
         const sortedProcesses = [...batch.processes].sort((a, b) => new Date(b.date) - new Date(a.date));
         for (const process of sortedProcesses.slice(0, 2)) {
+          // Clean up title
+          let cleanTitle = process.title;
+          if (!cleanTitle || cleanTitle.toLowerCase() === 'trồng' || cleanTitle.toLowerCase() === 'trồng trọt') {
+            cleanTitle = stageLabels[process.stage] || `Ghi nhận ${process.stage}`;
+          }
+
           activities.push({
             id: process._id?.toString() || batch._id.toString() + '_proc',
             type: 'process_added',
-            title: process.title || `Ghi nhận ${process.stage}`,
+            title: cleanTitle,
             product: batch.product?.name || 'Không rõ',
             location: process.location || batch.productionLocation || 'Đang cập nhật',
             performer: process.performer || 'Hệ thống',

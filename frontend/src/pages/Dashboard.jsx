@@ -269,7 +269,7 @@ const Dashboard = ({ user }) => {
                 </span>
               </div>
 
-              <div className="timeline-simple" style={{ maxHeight: '420px', overflowY: 'auto' }}>
+              <div className="timeline-simple" style={{ maxHeight: '600px', overflowY: 'auto', paddingRight: '10px' }}>
                 <AnimatePresence mode="popLayout">
                   {activities.length === 0 ? (
                     <motion.div
@@ -287,7 +287,7 @@ const Dashboard = ({ user }) => {
                     activities.map((activity, idx) => (
                       <motion.div
                         key={activity.id}
-                        className="d-flex gap-3 mb-3 pb-3 border-bottom"
+                        className={`d-flex gap-3 mb-3 pb-3 ${idx < activities.length - 1 ? 'border-bottom' : ''}`}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: idx * 0.05 }}

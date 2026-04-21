@@ -26,13 +26,11 @@ const Header = ({ user, onLogout }) => {
           <img 
             src="/logo.png" 
             alt="AgriTrace Logo" 
-            className="me-2" 
             style={{ height: '48px', width: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} 
-            onMouseOver={(e) => e.currentTarget.parentElement.style.transform = 'scale(1.05)'}
-            onMouseOut={(e) => e.currentTarget.parentElement.style.transform = 'scale(1)'}
           />
+          <span className="ms-2 fw-bold text-gradient d-none d-md-inline-block" style={{ fontSize: '1.5rem', letterSpacing: '-0.5px' }}>AgriTrace</span>
         </Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button className="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">

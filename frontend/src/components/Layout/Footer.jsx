@@ -55,7 +55,7 @@ const Footer = () => {
             <h6 className="fw-bold mb-4 text-dark text-uppercase small tracking-wider">Liên hệ</h6>
             <div className="d-flex gap-3 mb-3">
               <MapPin size={20} className="text-primary flex-shrink-0" />
-              <p className="text-muted small mb-0">aaaaaaaa TP.Cần Thơ</p>
+              <p className="text-muted small mb-0">TP.Cần Thơ</p>
             </div>
             <div className="d-flex gap-3 mb-3">
               <Phone size={20} className="text-primary flex-shrink-0" />
@@ -91,6 +91,11 @@ const Footer = () => {
       <style>{`
         .hover-primary:hover { color: var(--primary) !important; padding-left: 5px; }
         .footer-light { padding-bottom: 2rem !important; }
+        @media (max-width: 991.98px) {
+          .footer-light { text-align: center; }
+          .footer-light .d-flex { justify-content: center; }
+          .footer-light p { margin-left: auto; margin-right: auto; }
+        }
       `}</style>
     </footer>
   );

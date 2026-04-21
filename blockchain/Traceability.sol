@@ -6,6 +6,8 @@ pragma solidity ^0.8.0;
  * @dev Hệ thống lưu trữ lịch sử hành trình nông sản trên Blockchain Cronos
  */
 contract Traceability {
+    address public owner;
+
     struct Record {
         string action;      // Hành động (Thu hoạch, Đóng gói, Vận chuyển...)
         string location;    // Địa điểm thực hiện
@@ -15,10 +17,19 @@ contract Traceability {
     // Mapping từ Mã Truy Xuất (Trace Code) sang danh sách các bản ghi hành trình
     mapping(string => Record[]) private traceRecords;
 
+    constructor() {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can perform this action");
+        _;
+    }
+
     /**
      * @dev Thêm một bản ghi mới vào hành trình của nông sản
      */
-    function addTraceRecord(string memory maTruyXuat, string memory action, string memory location) public {
+    function addTraceRecord(string memory maTruyXuat, string memory action, string memory location) public onlyOwner {
         traceRecords[maTruyXuat].push(Record(action, location, block.timestamp));
     }
 
@@ -38,4 +49,3 @@ contract Traceability {
         return (record.action, record.location, record.timestamp);
     }
 }
-*/ file ví dụ */

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import api, { getTrace } from '../services/api';
-import { Search, MapPin, Calendar, Box, Package, ArrowRight, ShieldCheck, TreePine, Droplets, Wheat, Truck, Store, Database, Loader2, CheckCircle2, AlertCircle, Camera, X, Smartphone, Globe, QrCode, Activity } from 'lucide-react';
+import { Search, MapPin, Calendar, Box, Package, ArrowRight, ShieldCheck, TreePine, Droplets, Wheat, Truck, Store, Database, Loader2, CheckCircle2, AlertCircle, Camera, X, Smartphone, Globe, QrCode, Activity, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getContract } from '../services/contracts';
 import { ethers } from 'ethers';
@@ -342,10 +342,22 @@ const Trace = () => {
                       </h6>
                       <p className="small text-muted mb-0">Mã băm dữ liệu phi tập trung đảm bảo tính minh bạch.</p>
                     </div>
-                    <button className="btn btn-success rounded-pill px-4 d-flex align-items-center gap-2 shadow-sm" onClick={handleVerifyBlockchain} disabled={verifyLoading}>
-                      {verifyLoading ? <Loader2 className="animate-spin" size={18} /> : <ShieldCheck size={18} />}
-                      {verifyLoading ? 'Đang truy vấn...' : 'Đối soát ngay'}
-                    </button>
+                    <div className="d-flex gap-2">
+                       {result.verification?.hash && (
+                        <a 
+                          href={`https://explorer.cronos.org/testnet/tx/${result.verification.hash}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-outline-secondary rounded-pill px-3 d-flex align-items-center gap-2 shadow-sm"
+                        >
+                          <ExternalLink size={16} /> <span className="d-none d-sm-inline">Xem giao dịch</span>
+                        </a>
+                      )}
+                      <button className="btn btn-success rounded-pill px-4 d-flex align-items-center gap-2 shadow-sm" onClick={handleVerifyBlockchain} disabled={verifyLoading}>
+                        {verifyLoading ? <Loader2 className="animate-spin" size={18} /> : <ShieldCheck size={18} />}
+                        {verifyLoading ? 'Đang truy vấn...' : 'Đối soát ngay'}
+                      </button>
+                    </div>
                   </div>
                   {blockchainData && (
                     <div className="mt-4 pt-3 border-top">
@@ -421,6 +433,17 @@ const Trace = () => {
         }
         .animate-pulse-soft {
           animation: pulse-soft 2s ease-in-out infinite;
+        }
+
+        @media (max-width: 767.98px) {
+          .trace-page { padding-top: 2rem !important; }
+          .search-box-wrapper .form-control-lg { font-size: 1rem !important; padding-left: 3rem !important; }
+          .trace-results .card-img-top, .trace-results .object-fit-cover { height: 250px !important; }
+          .timeline { px: 2 !important; }
+          .timeline-item { gap: 3 !important; }
+          .timeline-icon-wrapper div { width: 40px !important; height: 40px !important; }
+          .timeline-content h5 { font-size: 1rem; }
+          .timeline-content .badge { font-size: 0.7rem; }
         }
       `}</style>
     </div>

@@ -348,20 +348,32 @@ const AdminBatches = () => {
                       </span>
                     </td>
                     <td>
-                      {b.blockchain?.hash ? (
-                        <div className="d-flex align-items-center gap-1 text-success small fw-bold">
-                          <ShieldCheck size={14} /> Đã lên chuỗi
-                        </div>
-                      ) : (
-                        <button 
-                          onClick={() => handleSyncBlockchain(b)}
-                          className="btn btn-outline-info btn-sm rounded-pill px-3 d-flex align-items-center gap-1"
-                          disabled={syncLoading}
-                        >
-                          {syncLoading ? <Loader2 size={12} className="animate-spin"/> : <Database size={12} />}
-                          Đồng bộ
-                        </button>
-                      )}
+                      <div className="d-flex flex-column gap-1" style={{ width: '90px' }}>
+                        {b.blockchain?.hash ? (
+                          <div className="d-flex flex-column align-items-start">
+                            <div className="d-flex align-items-center gap-1 text-success fw-bold mb-1" style={{ fontSize: '10px' }}>
+                              <ShieldCheck size={11} /> Đã lên chuỗi
+                            </div>
+                            <button 
+                              onClick={() => handleSyncBlockchain(b)}
+                              className="btn btn-outline-warning btn-sm rounded-pill p-0 d-flex align-items-center justify-content-center gap-1 border-opacity-50"
+                              style={{ fontSize: '9px', height: '18px', width: '75px' }}
+                              disabled={syncLoading}
+                            >
+                              Đồng bộ lại
+                            </button>
+                          </div>
+                        ) : (
+                          <button 
+                            onClick={() => handleSyncBlockchain(b)}
+                            className="btn btn-outline-primary btn-sm rounded-pill p-0 d-flex align-items-center justify-content-center gap-1 shadow-sm"
+                            style={{ fontSize: '11px', height: '26px', width: '85px' }}
+                            disabled={syncLoading}
+                          >
+                            <Database size={11} /> Đồng bộ
+                          </button>
+                        )}
+                      </div>
                     </td>
                     <td className="px-4 text-end">
                       <button onClick={() => handleOpenTimeline(b)} className="btn btn-light btn-sm rounded-circle p-2 mx-1 border shadow-sm" title="Nhật ký sản xuất">
